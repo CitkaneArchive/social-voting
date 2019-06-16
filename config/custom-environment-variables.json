@@ -1,0 +1,38 @@
+{
+    "network": {
+        "pubsub": {
+            "host": "PUBSUB_HOST",
+            "port": "PUBSUB_PORT"
+        },
+        "bff": {
+            "host": "BFF_HOST",
+            "static": "BFF_STATICPORT"
+        },
+        "persistance": {
+            "host": "PERSISTANCE_HOST",
+            "crud": "PERSISTANCE_CRUDPORT",
+            "publish": "PERSISTANCE_PUBLISHPORT"
+        },
+        "users": {
+            "host": "USERS_HOST",
+            "crud": "USERS_CRUDPORT",
+            "publish": "USERS_PUBLISHPORT"
+        },
+        "images": {
+            "host": "IMAGES_HOST",
+            "static": "IMAGES_STATICPORT",
+            "crud": "IMAGES_CRUDPORT",
+            "publish": "IMAGES_PUBLISHPORT"
+        },
+        "activities": {
+            "host": "ACTIVITIES_HOST",
+            "crud": "ACTIVITIES_CRUDPORT",
+            "publish": "ACTIVITIES_PUBLISHPORT"
+        },
+        "voting": {
+            "host": "VOTING_HOST",
+            "crud": "VOTING_CRUDPORT",
+            "publish": "VOTING_PUBLISHPORT"
+        }
+    }
+}
