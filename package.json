@@ -12,7 +12,7 @@
   "dependencies": {
     "@social/social-deployment": "git+https://git@github.com/citkane/social-deployment.git",
     "config": "^3.1.0",
-    "zmq": "^2.15.3"
+    "zeromq": "^5.1.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
