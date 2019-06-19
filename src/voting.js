@@ -2,7 +2,7 @@ const path = require('path');
 // eslint-disable-next-line no-underscore-dangle
 global.__rootDir = path.join(__dirname, '../');
 
-const Sockets = require('../../social-deployment/templates/nodejs/api/Sockets');
+const Sockets = require('./templates/Sockets');
 const ApiVoting = require('./api/ApiVoting');
 
 const sockets = new Sockets('voting');

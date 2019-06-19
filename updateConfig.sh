@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp -Tr ../social-deployment/config config
+cp -Tr ../src/templates/config config

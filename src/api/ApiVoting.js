@@ -1,5 +1,5 @@
 
-const Api = require('../../../social-deployment/templates/nodejs/api/Api');
+const Api = require('../templates/Api');
 
 class ApiVoting extends Api {
     constructor(sockets) {
