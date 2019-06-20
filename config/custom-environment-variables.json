@@ -1,6 +1,5 @@
 {
     "network": {
-        "pacts": "PACTS_LOCATION",
         "pubsub": {
             "host": "PUBSUB_HOST",
             "port": "PUBSUB_PORT"

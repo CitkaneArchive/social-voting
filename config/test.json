@@ -1,0 +1,8 @@
+{
+    "storage":{
+        "baseDir": "./test"
+	},
+	"network": {
+		"pacts": "http://localhost"
+	}
+}

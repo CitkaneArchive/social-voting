@@ -129,12 +129,6 @@ class BaseApi {
         if (!status || typeof status !== 'number') return this.reject();
         return Promise.resolve({ status, payload });
     }
-
-    checkStatus(response) {
-        if (!response.status || typeof response.status !== 'number') return this.reject();
-        if (response.status > 199 && response.status < 300) return response;
-        return Promise.reject(response);
-    }
 }
 
 module.exports = BaseApi;
