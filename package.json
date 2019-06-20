@@ -10,13 +10,16 @@
   "author": "Michael Jonker",
   "license": "UNLICENSED",
   "dependencies": {
-    "@social/social-deployment": "git+https://git@github.com/citkane/social-deployment.git",
     "config": "^3.1.0",
     "zeromq": "^5.1.0"
   },
   "devDependencies": {
+    "@pact-foundation/pact": "^8.2.6",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3"
+    "eslint-plugin-import": "^2.17.3",
+    "mocha": "^6.1.4"
   }
 }
