@@ -18,12 +18,6 @@
             "crud": "USERS_CRUDPORT",
             "publish": "USERS_PUBLISHPORT"
         },
-        "images": {
-            "host": "IMAGES_HOST",
-            "static": "IMAGES_STATICPORT",
-            "crud": "IMAGES_CRUDPORT",
-            "publish": "IMAGES_PUBLISHPORT"
-        },
         "activities": {
             "host": "ACTIVITIES_HOST",
             "crud": "ACTIVITIES_CRUDPORT",

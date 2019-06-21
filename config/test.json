@@ -2,7 +2,8 @@
     "storage":{
         "baseDir": "./test"
 	},
-	"network": {
-		"pacts": "http://localhost"
+	"pacts": {
+		"broker": "http://localhost",
+		"brokerPort": 80
 	}
 }
