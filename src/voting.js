@@ -32,3 +32,9 @@ const apiInterface = {
 };
 
 sockets.makeResponder(apiInterface);
+
+function gracefulShutdown() {
+    console.log('Gracefully shutting down social-voting');
+    process.exit();
+}
+module.exports = { apiInterface, api, gracefulShutdown };

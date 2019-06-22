@@ -4,6 +4,6 @@
 	},
 	"pacts": {
 		"broker": "http://localhost",
-		"brokerPort": 80
+		"brokerPort": 8083
 	}
 }
