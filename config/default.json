@@ -37,5 +37,9 @@
             "crud": 3041,
             "publish": 3042
         }
-    }
+    },
+	"pacts": {
+		"broker": "http://localhost",
+		"brokerPort": 8083
+	}
 }
