@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-use-before-define */
 const zmq = require('zeromq');
@@ -8,6 +9,29 @@ const serverErrorMsg = {
     status: 500,
     message: 'internal server error'
 };
+
+const events = {};
+const subscriber = zmq.socket('sub');
+const subscriberUrl = `tcp://${network.pubsub.host}:${network.pubsub.port}`;
+
+subscriber.on('message', (topic, message) => {
+    const t = topic.toString();
+    if (!events[t] || typeof events[t] !== 'function') return;
+    let payload;
+    try {
+        payload = JSON.parse(message.toString());
+    } catch (err) {
+        payload = message.toString();
+    } finally {
+        /**
+         * @callback Sockets~eventCallback
+         * @param {any} [payload] - the event data payload.
+         */
+        events[t](payload);
+    }
+});
+subscriber.connect(subscriberUrl);
+console.log('zmq subscriber:', subscriberUrl);
 
 class Sockets {
     /**
@@ -20,23 +44,28 @@ class Sockets {
         this.subscriber = zmq.socket('sub');
         const publisher = `tcp://${network[serviceName].host}:${network[serviceName].publish}`;
         const responder = `tcp://${network[serviceName].host}:${network[serviceName].crud}`;
-        const subscriber = `tcp://${network.pubsub.host}:${network.pubsub.port}`;
-        console.log('zmq publisher: ', publisher);
-        console.log('zmq responder:', responder);
-        console.log('zmq subscriber:', subscriber);
 
         this.publisher.bindSync(publisher);
+        console.log('zmq publisher: ', publisher);
         this.responder.bindSync(responder);
-        this.subscriber.connect(subscriber);
+        console.log('zmq responder:', responder);
     }
 
-    /** Respond with a generic error {@link response} */
+    /**
+     * Respond with a generic error {@link response}
+     * @param {blob} indentity - The zmq identifier blob passed from the request
+     * @param {string} [err] - a message to log on the server side.
+     * */
     throwError(identity, err) {
         console.error(new Error(err));
         this.responder.send([identity, '', JSON.stringify(serverErrorMsg)]);
     }
 
-    /** Publish to the pubsubProxy */
+    /**
+     * **Publish to the pubsubProxy**
+     * @param {string} topic - the topic to publish to.
+     * @param {any} [data] - The data to publish to the topic.
+     * */
     publish(topic, data) {
         try {
             const m = JSON.stringify([topic, JSON.stringify(data)]);
@@ -46,17 +75,29 @@ class Sockets {
         }
     }
 
-    /** Subscribe to  a topic */
-    subscribe(topic) {
-        this.subscriber.subscribe(topic);
+    /**
+     * **Subscribe to  a topic**
+     * @param {string} topic - The topic to subscribe to.
+     * @param {Sockets~eventCallback} callback - The callback action to a subscription event.
+     * */
+    on(topic, callback) {
+        if (!events[topic]) subscriber.subscribe(topic);
+        events[topic] = callback;
     }
 
-    /** Unsubscribe from a topic */
-    unsubscribe(topic) {
-        this.subscriber.unsubscribe(topic);
+    /**
+     * **Unsubscribe from a topic**
+     * @param {string} topic - The topic to unsubscribe from.
+     * */
+    off(topic) {
+        delete events[topic];
+        subscriber.unsubscribe(topic);
     }
 
-    /** Create the interface for request/response and pub/sub */
+    /**
+     * Create the zmq interface for request/response
+     * @param {module:voting.apiInterface} apiInterface - The public interface to the Api
+     * */
     makeResponder(apiInterface) {
         this.responder.on('message', (...args) => {
             const identity = args[0];

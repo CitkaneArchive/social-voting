@@ -3,7 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const chai = require('chai');
-const { api, gracefulShutdown } = require('../../src/voting');
+const { sockets, gracefulShutdown } = require('../../src/voting');
 
 const { expect } = chai;
 
@@ -23,7 +23,7 @@ describe('social-voting consumer', () => {
         let topic;
         let topics;
         try {
-            [lastMessage] = api.sockets.publisher._outgoing.lastBatch.content;
+            [lastMessage] = sockets.publisher._outgoing.lastBatch.content;
             [topic, topics] = JSON.parse(lastMessage.toString());
             topics = JSON.parse(topics);
         } catch (err) {
