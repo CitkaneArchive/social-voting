@@ -10,9 +10,9 @@ const sockets = new Sockets('voting');
 const { api } = new BaseApi(sockets);
 const voting = new ApiVoting(sockets, api);
 const bffSubscriptions = [
-    'voting-voted'
+    'voting/voted'
 ];
-api.publish('bff.makesubscriptions', bffSubscriptions);
+api.publish('bff/makesubscriptions', bffSubscriptions);
 
 const apiInterface = {
     create: {
@@ -25,7 +25,7 @@ const apiInterface = {
     update: {
         vote: request => voting.setVote(request.args[0], request.args[1], request.ownerId)
             .then((response) => {
-                api.publish('voting-voted', response.payload);
+                api.publish('voting/voted', response.payload);
                 return response;
             })
     },

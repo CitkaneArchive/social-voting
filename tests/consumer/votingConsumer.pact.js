@@ -18,7 +18,7 @@ describe('social-voting consumer', () => {
         expect(process.env.NODE_ENV).to.equal('test');
     });
 
-    it('publishes a list of subscription topics to \'bff.makesubscriptions\'', () => {
+    it('publishes a list of subscription topics to \'bff/makesubscriptions\'', () => {
         let lastMessage;
         let topic;
         let topics;
@@ -29,7 +29,7 @@ describe('social-voting consumer', () => {
         } catch (err) {
             throw err;
         }
-        expect(topic).to.equal('bff.makesubscriptions');
+        expect(topic).to.equal('bff/makesubscriptions');
         expect(topics.length).to.equal(1);
     });
 });
