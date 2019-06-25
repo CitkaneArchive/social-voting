@@ -11,7 +11,7 @@ const { version } = require('../../package.json');
 
 const LOG_LEVEL = process.env.LOG_LEVEL || 'WARN';
 const pacts = config.get('pacts');
-const pactBrokerUrl = `${pacts.broker}:${pacts.brokerPort}`;
+const pactBrokerUrl = `http://${pacts.host}:${pacts.port}`;
 
 function makePact(messageProviders) {
     return new MessageProviderPact({

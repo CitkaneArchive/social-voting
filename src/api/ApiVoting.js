@@ -9,7 +9,7 @@ class ApiVoting extends Api {
     }
 
     setVote(targetId, dir, ownerId) {
-        if (!targetId || !dir || !ownerId) return api.reject(400, 'bad api call');
+        if (!targetId || !dir || !ownerId || (dir !== '+' && dir !== '-')) return api.reject(400, 'bad api call');
         const { voting } = this.cache;
         const update = { ...voting };
         try {
@@ -38,6 +38,19 @@ class ApiVoting extends Api {
             if (voting[entityId][vote] === '-') total -= 1;
         });
         return api.resolve(200, { total, voted: voting[entityId][ownerId] || false });
+    }
+
+    deleteVote(entityId) {
+        const { voting } = this.cache;
+        if (!entityId || !voting[entityId]) return;
+        const update = { ...voting };
+        try {
+            delete update[entityId];
+            this.save(update);
+            this.cache.voting = update;
+        } catch (err) {
+            console.error(err);
+        }
     }
 }
 

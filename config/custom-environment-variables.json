@@ -28,5 +28,9 @@
             "crud": "VOTING_CRUDPORT",
             "publish": "VOTING_PUBLISHPORT"
         }
-    }
+    },
+	"pacts": {
+		"host": "PACTS_HOST",
+		"port": "PACTS_PORT"
+	}
 }

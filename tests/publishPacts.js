@@ -7,7 +7,7 @@ const { version } = require('../package.json');
 const pacts = config.get('pacts');
 const opts = {
     pactFilesOrDirs: [path.join(__dirname, 'pacts')],
-    pactBroker: `${pacts.broker}:${pacts.brokerPort}`,
+    pactBroker: `http://${pacts.host}:${pacts.port}`,
     tags: ['prod', version],
     consumerVersion: version
 };
