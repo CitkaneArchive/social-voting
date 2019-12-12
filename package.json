@@ -13,6 +13,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "config": "^3.1.0",
+    "fs-extra": "^8.1.0",
     "zeromq": "^5.1.0"
   },
   "devDependencies": {
